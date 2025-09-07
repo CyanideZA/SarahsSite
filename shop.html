@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah Lawry - Healing Products Shop</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4cb5ae;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo h1 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo p {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Shop-specific styles */
+        .shop-hero {
+            background: linear-gradient(rgba(74, 111, 165, 0.7), rgba(22, 96, 136, 0.7)), url('https://images.unsplash.com/photo-1543365067-f488401f5c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            padding: 6rem 0;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .shop-hero h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+             /* Updated Product Grid Styles */
+         .product-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+             gap: 2.5rem;
+             margin-bottom: 3rem;
+         }
+
+        .product-card {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08),
+            0 5px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12),
+            0 8px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-card-content {
+            padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            line-height: 1.3;
+            text-align: center;
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .product-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(to bottom, var(--accent-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(76, 181, 174, 0.3);
+            margin-top: auto;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .add-to-cart:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(76, 181, 174, 0.4);
+        }
+
+        .add-to-cart:hover:before {
+            left: 100%;
+        }
+
+        /* Best Seller Badge - you can add this to specific products */
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 35px;
+            font-size: 0.8rem;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .product-rating {
+            color: #ff9800;
+            margin: 0.8rem 0;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .product-rating span {
+            color: #666;
+            margin-left: 5px;
+        }
+
+        .product-rating i {
+            margin: 0 1px;
+        }
+        
+        .cart-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 3rem;
+        }
+
+        .cart-items {
+            margin: 1.5rem 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: right;
+            margin: 1.5rem 0;
+        }
+
+        .payment-method {
+            margin: 1.5rem 0;
+        }
+
+        .payment-options {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .payment-options label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkout-form {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: var(--font-body);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .stripe-element,
+        .eft-instructions {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .checkout-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .checkout-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .remove-item {
+            color: #ff4d4d;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            background-color: #4cb5ae;
+            color: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification.error {
+            background-color: #ff4d4d;
+        }
+
+        @media (max-width: 768px) {
+            .payment-options {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        .section-padding {
+            padding: 3rem 0;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ecf0f1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Order Success Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .order-success-modal {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .order-success-modal {
+            transform: translateY(0);
+        }
+
+        .order-success-modal i {
+            font-size: 4rem;
+            color: #4cb5ae;
+            margin-bottom: 1rem;
+        }
+
+        .order-success-modal h3 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .order-success-modal p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .order-details {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .order-details p {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-close-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close-btn:hover {
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+<!-- Header and Navigation -->
+<header>
+    <div class="container">
+        <div class="logo">
+            <h1>Intuitive Healing and Astrology</h1>
+            <p>Sarah Lawry</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#astrology">Astrology</a></li>
+                <li><a href="index.html#books">Books</a></li>
+                <li><a href="index.html#contact">Consultation</a></li>
+                <li><a href="shop.html">Shop</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</header>
+
+<!-- Shop Hero Section -->
+<section class="shop-hero">
+    <div class="container">
+        <h2>Healing Products & Resources</h2>
+        <p>Tools and supplements to support your healing journey</p>
+    </div>
+</section>
+
+<!-- Shop Container -->
+<section class="shop-container section-padding">
+    <div class="container">
+        <div class="product-grid">
+            <!-- Iodine Supplement -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Iodine Supplement">
+                <div class="product-card-content">
+                    <h3>Iodine Supplement</h3>
+                    <p class="price">R299.00</p>
+                    <p>High-quality iodine supplement for thyroid health</p>
+                    <button class="add-to-cart" data-product="Iodine Supplement" data-price="299">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Methylene Blue -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Methylene Blue">
+                <div class="product-card-content">
+                    <div class="product-badge">Bestseller</div>
+                    <h3>Methylene Blue</h3>
+                    <p class="price">R399.00</p>
+                    <p>Pharmaceutical grade methylene blue for cognitive support</p>
+                    <button class="add-to-cart" data-product="Methylene Blue" data-price="399">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Castor Oil Pack -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1603665276881-5c2f2f4dcec3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Castor Oil Pack">
+                <div class="product-card-content">
+                    <h3>Castor Oil Pack</h3>
+                    <p class="price">R449.00</p>
+                    <p>Organic castor oil pack for liver support and detoxification</p>
+                    <button class="add-to-cart" data-product="Castor Oil Pack" data-price="449">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Magnesium Glycinate -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Magnesium Glycinate">
+                <div class="product-card-content">
+                    <div class="product-badge">Popular</div>
+                    <h3>Magnesium Glycinate</h3>
+                    <p class="price">R349.00</p>
+                    <p>High absorption magnesium for better sleep and muscle relaxation</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.5/5 (128 reviews)</span>
+                    </div>
+                    <button class="add-to-cart" data-product="Magnesium Glycinate" data-price="349">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Liposomal Vitamin C -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Liposomal Vitamin C">
+                <div class="product-card-content">
+                    <h3>Liposomal Vitamin C</h3>
+                    <p class="price">R429.00</p>
+                    <p>Advanced absorption technology for maximum immune support</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>4.8/5 (92 reviews)</span>
+                    </div>
+                    <button class="add-to-cart" data-product="Liposomal Vitamin C" data-price="429">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Circadian Light Therapy Lamp -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1595851797077-9cc4730b03a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Circadian Light Therapy Lamp">
+                <div class="product-card-content">
+                    <div class="product-badge">New</div>
+                    <h3>Circadian Light Therapy Lamp</h3>
+                    <p class="price">R899.00</p>
+                    <p>Regulate your sleep-wake cycle and boost energy levels</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span>4.2/5 (67 reviews)</span>
+                    </div>
+                    <button class="add-to-cart" data-product="Circadian Light Therapy Lamp" data-price="899">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Adrenal Support Complex -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Adrenal Support Complex">
+                <div class="product-card-content">
+                    <h3>Adrenal Support Complex</h3>
+                    <p class="price">R379.00</p>
+                    <p>Natural formula to combat fatigue and support stress response</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.6/5 (114 reviews)</span>
+                    </div>
+                    <button class="add-to-cart" data-product="Adrenal Support Complex" data-price="379">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Gut Healing Protocol -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Gut Healing Protocol">
+                <div class="product-card-content">
+                    <div class="product-badge">Bestseller</div>
+                    <h3>Gut Healing Protocol</h3>
+                    <p class="price">R549.00</p>
+                    <p>Complete 30-day program for digestive health restoration</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>4.9/5 (203 reviews)</span>
+                    </div>
+                    <button class="add-to-cart" data-product="Gut Healing Protocol" data-price="549">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- PEMF Therapy Mat -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1595851797077-9cc4730b03a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="PEMF Therapy Mat">
+                <div class="product-card-content">
+                    <h3>PEMF Therapy Mat</h3>
+                    <p class="price">R2,499.00</p>
+                    <p>Pulsed electromagnetic field therapy for cellular regeneration</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.7/5 (56 reviews)</span>
+                    </div>
+                    <button class="add-to-cart" data-product="PEMF Therapy Mat" data-price="2499">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Mitochondrial Support Blend -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Mitochondrial Support Blend">
+                <div class="product-card-content">
+                    <h3>Mitochondrial Support Blend</h3>
+                    <p class="price">R419.00</p>
+                    <p>Enhance cellular energy production and reduce fatigue</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span>4.0/5 (89 reviews)</span>
+                    </div>
+                    <button class="add-to-cart" data-product="Mitochondrial Support Blend" data-price="419">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Infrared Sauna Blanket -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1595851797077-9cc4730b03a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Infrared Sauna Blanket">
+                <div class="product-card-content">
+                    <div class="product-badge">Sale</div>
+                    <h3>Infrared Sauna Blanket</h3>
+                    <p class="price">R1,799.00</p>
+                    <p>Detoxify and relax with portable infrared therapy</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>4.8/5 (142 reviews)</span>
+                    </div>
+                    <button class="add-to-cart" data-product="Infrared Sauna Blanket" data-price="1799">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Nervous System Tonic -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Nervous System Tonic">
+                <div class="product-card-content">
+                    <h3>Nervous System Tonic</h3>
+                    <p class="price">R329.00</p>
+                    <p>Calming herbal blend for anxiety relief and mental clarity</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.5/5 (176 reviews)</span>
+                    </div>
+                    <button class="add-to-cart" data-product="Nervous System Tonic" data-price="329">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Lymphatic Drainage Kit -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1603665276881-5c2f2f4dcec3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Lymphatic Drainage Kit">
+                <div class="product-card-content">
+                    <div class="product-badge">Popular</div>
+                    <h3>Lymphatic Drainage Kit</h3>
+                    <p class="price">R499.00</p>
+                    <p>Complete set for improving circulation and detoxification</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>4.9/5 (98 reviews)</span>
+                    </div>
+                    <button class="add-to-cart" data-product="Lymphatic Drainage Kit" data-price="499">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Red Light Therapy Device -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1595851797077-9cc4730b03a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Red Light Therapy Device">
+                <div class="product-card-content">
+                    <div class="product-badge">Bestseller</div>
+                    <h3>Red Light Therapy Device</h3>
+                    <p class="price">R1,899.00</p>
+                    <p>Portable red light therapy device for circadian rhythm support</p>
+                    <button class="add-to-cart" data-product="Red Light Therapy Device" data-price="1899">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Section -->
+        <div class="cart-container">
+            <h3>Your Order</h3>
+            <div class="cart-items">
+                <!-- Items will be added here by JavaScript -->
+            </div>
+            <div class="cart-total">
+                <p>Total: <span id="cart-total">R0.00</span></p>
+            </div>
+
+            <!-- Payment Method Selection -->
+            <div class="payment-method">
+                <h4>Payment Method</h4>
+                <div class="payment-options">
+                    <label>
+                        <input type="radio" name="payment-method" value="stripe" checked>
+                        <span>Credit/Debit Card</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="payment-method" value="eft">
+                        <span>Bank Transfer (EFT)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Checkout Form -->
+            <form id="checkout-form" class="checkout-form">
+                <h4>Shipping Details</h4>
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="address" placeholder="Shipping Address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <textarea name="customization" placeholder="Special Instructions (if any)"></textarea>
+                </div>
+
+                <!-- Stripe Payment Element (hidden for EFT) -->
+                <div id="stripe-payment-element" class="stripe-element">
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 5px; text-align: center;">
+                        <p>Stripe payment integration would be implemented here in a production environment.</p>
+                        <p>For demonstration, we'll simulate a successful payment.</p>
+                    </div>
+                </div>
+
+                <!-- EFT Instructions (hidden by default) -->
+                <div id="eft-instructions" class="eft-instructions" style="display: none;">
+                    <h5>EFT Payment Instructions</h5>
+                    <p>Please make payment to:</p>
+                    <p><strong>Bank:</strong> Standard Bank</p>
+                    <p><strong>Account Name:</strong> Sarah Lawry Healing</p>
+                    <p><strong>Account Number:</strong> 0123456789</p>
+                    <p><strong>Branch Code:</strong> 123456</p>
+                    <p><strong>Reference:</strong> Your Name + Order #</p>
+                    <p>Email proof of payment to <strong>orders@sarahlawryhealing.com</strong></p>
+                </div>
+
+                <button type="submit" id="submit-order" class="checkout-btn">
+                    <span id="button-text">Pay with Card</span>
+                    <span id="button-spinner" class="spinner" style="display: none;"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Notification Element -->
+<div id="notification" class="notification"></div>
+
+<!-- Order Success Modal -->
+<div class="modal-overlay" id="success-modal">
+    <div class="order-success-modal">
+        <i class="fas fa-check-circle"></i>
+        <h3>Order Confirmed!</h3>
+        <p>Thank you for your order. A confirmation email has been sent to your email address.</p>
+
+        <div class="order-details">
+            <p><strong>Order Reference:</strong> <span id="order-ref"></span></p>
+            <p><strong>Customer Name:</strong> <span id="customer-name"></span></p>
+            <p><strong>Order Total:</strong> <span id="order-total"></span></p>
+        </div>
+
+        <p>We will process your order within 24-48 hours. You will receive a notification once your items have been shipped.</p>
+        <button class="modal-close-btn" id="modal-close">Continue Shopping</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Intuitive Healing and Astrology</h3>
+                <p>Sarah Lawry</p>
+                <p>Johannesburg, South Africa</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>WhatsApp: +27 72 808 7795</p>
+                <p>Email: info@sarahlawryhealing.com</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Follow</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Intuitive Healing and Astrology. All rights reserved.</p>
+            <p>Disclaimer: I am not a doctor but a healer or health coach. I don't prescribe medicines but suggest lifestyle changes and orthomolecular protocols.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Shopping Cart Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        let cart = [];
+
+        // Notification function
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = isError ? 'notification error show' : 'notification show';
+
+            setTimeout(() => {
+                notification.className = 'notification';
+            }, 3000);
+        }
+
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const product = this.dataset.product;
+                const price = parseFloat(this.dataset.price);
+
+                // Check if product already in cart
+                const existingItem = cart.find(item => item.product === product);
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        product: product,
+                        price: price,
+                        quantity: 1
+                    });
+                }
+
+                updateCart();
+                showNotification(`${product} added to cart!`);
+            });
+        });
+
+        // Update cart display
+        function updateCart() {
+            const cartItems = document.querySelector('.cart-items');
+            const cartTotal = document.getElementById('cart-total');
+
+            // Clear current cart items
+            cartItems.innerHTML = '';
+
+            // Add items to cart
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+                cartTotal.textContent = 'R0.00';
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                <div>
+                    <strong>${item.product}</strong>
+                    <p>R${item.price.toFixed(2)} x ${item.quantity}</p>
+                </div>
+                <div>
+                    <p>R${itemTotal.toFixed(2)}</p>
+                    <button class="remove-item" data-index="${index}">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+
+                cartItems.appendChild(cartItem);
+            });
+
+            // Update total
+            cartTotal.textContent = `R${total.toFixed(2)}`;
+
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    const removedItem = cart[index].product;
+                    cart.splice(index, 1);
+                    updateCart();
+                    showNotification(`${removedItem} removed from cart`);
+                });
+            });
+        }
+
+        // Payment method toggle
+        document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'stripe') {
+                    document.getElementById('stripe-payment-element').style.display = 'block';
+                    document.getElementById('eft-instructions').style.display = 'none';
+                    document.getElementById('button-text').textContent = 'Pay with Card';
+                } else {
+                    document.getElementById('stripe-payment-element').style.display = 'none';
+                    document.getElementById('eft-instructions').style.display = 'block';
+                    document.getElementById('button-text').textContent = 'Place Order';
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!', true);
+                return;
+            }
+
+            const formData = new FormData(this);
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+
+            // Show loading state
+            document.getElementById('button-text').style.display = 'none';
+            document.getElementById('button-spinner').style.display = 'inline-block';
+            document.getElementById('submit-order').disabled = true;
+
+            try {
+                if (paymentMethod === 'stripe') {
+                    // Simulate Stripe payment processing
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+
+                    // In a real implementation, you would use Stripe's API here
+                    // For demo purposes, we'll assume the payment was successful
+                }
+
+                // Process order
+                const orderData = {
+                    to: formData.get('email'),
+                    customer_name: formData.get('name'),
+                    customer_email: formData.get('email'),
+                    customer_phone: formData.get('phone'),
+                    customer_address: formData.get('address'),
+                    customization: formData.get('customization'),
+                    order_ref: 'SL' + Date.now(),
+                    order_date: new Date().toLocaleDateString('en-ZA'),
+                    order_items: generateOrderItemsHTML(),
+                    order_total: calculateOrderTotal(),
+                    payment_method: paymentMethod === 'stripe' ? 'Credit Card' : 'Bank Transfer (EFT)',
+                    admin_email: 'a.lawry98@gmail.com' // Send admin email to this address
+                };
+
+                // Send order data to server (simulated)
+                const response = await sendOrderToServer(orderData);
+
+                if (response.success) {
+                    // Show success modal with order details
+                    document.getElementById('order-ref').textContent = orderData.order_ref;
+                    document.getElementById('customer-name').textContent = orderData.customer_name;
+                    document.getElementById('order-total').textContent = 'R' + orderData.order_total;
+                    document.getElementById('success-modal').classList.add('active');
+
+                    // Reset cart and form
+                    cart = [];
+                    updateCart();
+                    this.reset();
+                } else {
+                    throw new Error(response.error || 'Failed to process order');
+                }
+
+            } catch (error) {
+                console.error('Order processing error:', error);
+                showNotification('Error: ' + error.message, true);
+            } finally {
+                // Reset button state
+                document.getElementById('button-text').style.display = 'inline';
+                document.getElementById('button-spinner').style.display = 'none';
+                document.getElementById('submit-order').disabled = false;
+            }
+        });
+
+        // Close modal functionality
+        document.getElementById('modal-close').addEventListener('click', function() {
+            document.getElementById('success-modal').classList.remove('active');
+        });
+
+        // Helper functions
+        function generateOrderItemsHTML() {
+            let itemsHTML = '';
+            cart.forEach(item => {
+                itemsHTML += `<div class="item">${item.product} - R${item.price} x ${item.quantity} = R${(item.price * item.quantity).toFixed(2)}</div>`;
+            });
+            return itemsHTML;
+        }
+
+        function calculateOrderTotal() {
+            return cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
+        }
+
+        // Simulate sending order data to server
+        async function sendOrderToServer(orderData) {
+            // In a real implementation, this would be a fetch request to your server
+            // For this demo, we'll simulate a successful API call
+
+            console.log('Sending order data to server:', orderData);
+
+            // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Simulate successful response
+            return {
+                success: true,
+                message: 'Order processed successfully',
+                order_ref: orderData.order_ref
+            };
+        }
+
+        // Initialize cart
+        updateCart();
+    });
+</script>
+</body>
+</html>
